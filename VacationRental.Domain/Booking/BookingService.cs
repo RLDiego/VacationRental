@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using VacationRental.Domain.DTO.Booking;
 using VacationRental.Domain.DTO.Common;
 using VacationRental.Domain.Rentals;
@@ -56,16 +57,10 @@ namespace VacationRental.Domain.Booking
         private void CheckAvaiability(BookingBindingModel model, int preparationDays, int bookedTimeinDays)
         {
             var bookingsInRental = this.bookingRepository.GetByRentalId(model.RentalId);
-            var count = 0;
-            foreach (var booking in bookingsInRental)
-            {
-                if ((booking.Start <= model.Start.Date && booking.Start.AddDays(booking.Nights + preparationDays) > model.Start.Date)
-                    || (booking.Start < model.Start.AddDays(bookedTimeinDays) && booking.Start.AddDays(booking.Nights + preparationDays) >= model.Start.AddDays(bookedTimeinDays))
-                    || (booking.Start > model.Start && booking.Start.AddDays(booking.Nights + preparationDays) < model.Start.AddDays(bookedTimeinDays)))
-                {
-                    count++;
-                }
-            }
+            var count = bookingsInRental.Where(b => (b.Start <= model.Start.Date && b.Start.AddDays(b.Nights + preparationDays) > model.Start.Date)
+                    || (b.Start < model.Start.AddDays(bookedTimeinDays) && b.Start.AddDays(b.Nights + preparationDays) >= model.Start.AddDays(bookedTimeinDays))
+                    || (b.Start > model.Start && b.Start.AddDays(b.Nights + preparationDays) < model.Start.AddDays(bookedTimeinDays))).Count();
+            
             if (count >= this.rentalRepository.GetById(model.RentalId).Units)
                 throw new ApplicationException("Not available");
         }

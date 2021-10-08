@@ -36,5 +36,10 @@ namespace VacationRental.Persistence
         {
             return rentals.Count + 1;
         }
+
+        public void Modify(RentalViewModel rental)
+        {
+            this.rentals[rental.Id] = rental;
+        }
     }
 }

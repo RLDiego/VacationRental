@@ -44,7 +44,7 @@ namespace VacationRental.Domain.Calendar
             {
                 var date = start.Date.AddDays(i);
                 var bookingUnits = this.bookingRepository.GetBookingsPerDayAndRentalId(rentalId, date).Select(b => new CalendarBookingViewModel() { Id = b.Id }).ToList();
-                var preparationTimes = this.bookingRepository.GetPreparationsPerDayAndRentalId(rentalId, date, rentalPreparationDays).Select(b => new PreparationTime() { }).ToList();
+                var preparationTimes = this.bookingRepository.GetPreparationTimesPerDayAndRentalId(rentalId, date, rentalPreparationDays).Select(b => new PreparationTime() { }).ToList();
 
                 for (var y = 0; y <= bookingUnits.Count - 1; y++)
                 {

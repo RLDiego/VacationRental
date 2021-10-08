@@ -7,5 +7,6 @@ namespace VacationRental.Domain.Rentals
     {
         RentalViewModel GetById(int rentalId);
         ResourceIdViewModel Add(RentalBindingModel model);
+        void Modify(int rentalId, RentalBindingModel model);
     }
 }

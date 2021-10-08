@@ -9,5 +9,6 @@ namespace VacationRental.Domain.Rentals
         int GetNextId();
         void Add(RentalViewModel newRental);
         int GetPreparationDays(int rentalId);
+        void Modify(RentalViewModel rental);
     }
 }

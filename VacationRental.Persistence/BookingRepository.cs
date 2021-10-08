@@ -25,12 +25,17 @@ namespace VacationRental.Persistence
             return bookings[rentalId];
         }
 
+        public List<BookingViewModel> GetBookingsPerRentalId(int rentalId)
+        {
+            return bookings.Values.Where(b => b.RentalId == rentalId).ToList();
+        }
+
         public List<BookingViewModel> GetBookingsPerDayAndRentalId(int rentalId, DateTime date)
         {
             return bookings.Values.Where(b => b.RentalId == rentalId && b.Start <= date && b.Start.AddDays(b.Nights) > date).ToList();
         }
 
-        public List<BookingViewModel> GetPreparationsPerDayAndRentalId(int rentalId, DateTime date, int preparationDays)
+        public List<BookingViewModel> GetPreparationTimesPerDayAndRentalId(int rentalId, DateTime date, int preparationDays)
         {
             return bookings.Values.Where(b => b.RentalId == rentalId && b.Start.AddDays(b.Nights) <= date && b.Start.AddDays(b.Nights + preparationDays) > date).ToList();
         }
@@ -44,10 +49,20 @@ namespace VacationRental.Persistence
         {
             this.bookings.Add(model.Id, model);
         }
-
+        
         public int GetNextId()
         {
             return bookings.Count + 1;
+        }
+
+        public DateTime GetFirstOcupacionDate(int rentalId)
+        {
+            return this.GetBookingsPerRentalId(rentalId).Min(b => b.Start);
+        }
+
+        public DateTime GetLastOcupationDate(int rentalId, int preparationTimeInDays = 0)
+        {
+             return this.GetBookingsPerRentalId(rentalId).Max(b => b.Start.AddDays(b.Nights + preparationTimeInDays));
         }
     }
 }
