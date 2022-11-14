@@ -20,10 +20,5 @@ namespace Aiia.FrontEnd.Pages
             _memoryCache.Set("OAuthKey", code, cacheEntryOptions);
             return Redirect("/");
         }
-
-        public IActionResult OnGet()
-        {
-            return  View
-        }
     }
 }

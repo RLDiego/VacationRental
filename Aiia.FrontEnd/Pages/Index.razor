@@ -1,0 +1,35 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+@using Aiia.FrontEnd.Data
+@inject LoginService LoginService
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+@if (isLoged)
+{
+<p><em>You are In</em></p>
+<input type="button" value="Sign out" onclick="@SignOut()" />
+}
+else
+{
+<p><em>You are not loged in</em></p>
+<input type="button" value="Sign In" onclick="@SignOut()" />
+}
+
+@code {
+    private bool isLoged;
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoged = await LoginService.IsLoged();
+    }
+
+    protected async Task SignOut()
+    {
+        await LoginService.SignOut();
+    }
+}
