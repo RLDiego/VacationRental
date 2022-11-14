@@ -1,0 +1,20 @@
+﻿@page "/error"
+@inject NavigationManager NavManager
+
+<div class="content px-4">
+    <h1 class="text-danger">Error.</h1>
+    <h2 class="text-danger">An error occurred while processing your request.</h2>
+    <p>
+        <strong>Try again later</strong>
+               
+    </p>
+    <button class="btn btn-primary" @onclick="IncrementCount">Return to Main Page</button>
+
+</div>
+
+@code {
+    private void IncrementCount()
+    {
+        NavManager.NavigateTo("/api/login");
+    }
+}
