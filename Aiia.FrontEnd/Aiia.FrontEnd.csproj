@@ -5,5 +5,14 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aiia.Contracts\Aiia.Contracts.csproj" />
+    <ProjectReference Include="..\Aiia.Infrastructure\Aiia.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\aiiaimg.png" />
+  </ItemGroup>
   
 </Project>

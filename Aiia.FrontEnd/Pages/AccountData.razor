@@ -1,0 +1,66 @@
+﻿@page "/transactions"
+
+<PageTitle>Transactions</PageTitle>
+
+@using Aiia.FrontEnd.Data
+@using Aiia.Contracts.Entities
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using Microsoft.AspNetCore.Mvc.ViewFeatures
+@inject OperationService OperationService
+
+<h1>Transactions</h1>
+<p>Here you can see your accounts</p>
+
+@if (transacions== null || transacions.Count == 0)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Ammount</th>
+            <th>Currency</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Text</th>
+            
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var transacion in transacions)
+        {
+            <tr>
+                <td>@transacion.transactionAmount.value</td>
+                <td>@transacion.currency</td>
+                <td>@transacion.type</td>
+                <td>@transacion.state</td>
+                <td>@transacion.text</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    @if (!string.IsNullOrWhiteSpace(paginationToken))
+    {
+        <input type="button" value="More" @onclick="NextPage"/>
+    }
+}
+
+@code {
+    private string paginationToken;
+    private List<Transaction>? transacions;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        transacions = new List<Transaction>();
+        await NextPage();
+    }
+
+    protected async Task NextPage()
+    {
+        var transactionsPage = await OperationService.GetTransactions(paginationToken);
+        paginationToken = transactionsPage.pagingToken;
+        transacions.AddRange(transactionsPage.transactions);
+    }
+}

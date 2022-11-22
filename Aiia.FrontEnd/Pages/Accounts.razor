@@ -1,0 +1,56 @@
+﻿@page "/fetchdata"
+
+<PageTitle>Accounts</PageTitle>
+
+@using Aiia.FrontEnd.Data
+@using Aiia.Contracts.Entities
+@inject AccountsService AccountService
+
+<h1>Accounts</h1>
+
+<p>Here you can see your accounts</p>
+
+@if (accounts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Balance</th>
+            <th>Owner</th>
+            <th>Bank</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var account in accounts)
+        {
+            <tr>
+                <td>@account.name</td>
+                <td>@account.bookedBalance</td>
+                <td>@account.owner</td>
+                <td>@account.accountProvider.name</td>
+                <td>
+                    <input type="button" value="Details" onclick="location.href = 'https://localhost:7126/trans?account=@account.id&destination=transactions'"/>
+                </td>  
+                <td>
+                    <input type="button" value="Do Payment" onclick="location.href = 'https://localhost:7126/trans?account=@account.id&destination=payment'"/>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <input type="text" id="AccountNumber" name="AccountNumber"/>
+}
+
+@code {
+    private List<Account>? accounts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        accounts = await AccountService.GetAccounts();
+    }
+}

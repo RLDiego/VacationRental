@@ -1,0 +1,54 @@
+@page "/paymentinfo"
+<PageTitle>Payment</PageTitle>
+@using Aiia.FrontEnd.Data
+@using Aiia.Contracts.Entities
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using Microsoft.AspNetCore.Mvc.ViewFeatures
+@using Aiia.Contracts
+@inject OperationService OperationService
+@inject NavigationManager NavManager
+<h2></h2>
+ @if (authStatus == null)
+    {
+        <h5>Loading...</h5>
+    }
+ else
+ {
+     <table class="table">
+          @foreach (var auth in authStatus.payments)
+                 {
+                     <thead>
+                         <tr>
+                             <th>Ammount</th>
+                             <th>Currency</th>
+                             <th>Destination</th>
+                             <th>Message</th>
+                             <th>Destination Name</th>
+                             <th>Date</th>
+                             <th>Status</th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                          <tr>
+                              <td>@auth.amount.value</td>
+                              <td>@auth.amount.currency</td>
+                              <td>@auth.destination.bban.accountNumber</td>
+                              <td>@auth.message</td>
+                              <td>@auth.destination.name</td>
+                              <td>@auth.createdAt.Substring(0, 10)</td>
+                              <td>@auth.status.paymentStatusCode</td>
+                          </tr>
+                      </tbody>
+                 }
+     </table>
+     <hr/>
+ }
+@code
+{
+    private PaymentStatusAuth authStatus;
+    protected override async Task OnInitializedAsync()
+    {
+        
+        authStatus = await OperationService.GetPaymentAuthInfo();
+    }
+}

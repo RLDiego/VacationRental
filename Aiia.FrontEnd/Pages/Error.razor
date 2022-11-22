@@ -1,5 +1,6 @@
 ﻿@page "/error"
 @inject NavigationManager NavManager
+@inject Aiia.FrontEnd.Data.LoginService TokenService
 
 <div class="content px-4">
     <h1 class="text-danger">Error.</h1>
@@ -8,13 +9,14 @@
         <strong>Try again later</strong>
                
     </p>
-    <button class="btn btn-primary" @onclick="IncrementCount">Return to Main Page</button>
+    <input type="button" class="btn btn-primary" @onclick="IncrementCount" value="Return to Main Page"/>
 
 </div>
 
 @code {
-    private void IncrementCount()
+    private async Task IncrementCount()
     {
-        NavManager.NavigateTo("/api/login");
+        await TokenService.SignOut();
+        NavManager.NavigateTo("/");
     }
 }

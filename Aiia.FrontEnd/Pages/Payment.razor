@@ -1,0 +1,74 @@
+@page "/payment"
+<PageTitle>Payment</PageTitle>
+@using Aiia.FrontEnd.Data
+@using Aiia.Contracts.Entities
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using Microsoft.AspNetCore.Mvc.ViewFeatures
+@using Aiia.Contracts
+@inject OperationService OperationService
+@inject NavigationManager NavManager
+<h2>Payment</h2>
+ @if (!string.IsNullOrEmpty(url))
+    {
+        <input type="button" value="Continue" onclick="location.href = '@url'"/>
+    }
+ else
+ {
+     <table>
+         <tr>
+             <td>Name and Surname </td>
+             <td><input type="text" id="NameSurname" name="NameSurname" @bind="@nameSurname"/></td>
+         </tr>
+         <p/>
+         <tr>
+             <td>Ammount </td>
+             <td><input type="number" id="Ammount" name="Ammount" @bind="@ammount"/></td>
+         </tr>
+         <p/>
+         <tr>
+             <td>Message</td>
+             <td><input type="text" id="Message" name="Message" @bind="@message"/></td>
+         </tr>
+         <p/>
+         <tr>
+             <td>Account Number</td>
+             <td><input type="text" id="AccountNumber" name="AccountNumber" @bind="@account"/></td>
+         </tr>
+         <p/>
+         <tr>
+             <td></td>
+             @if (loading)
+             {
+                 <td>Loading ...</td>
+             }
+             else
+             {
+                 <td><input type="submit" value="Pay" @onclick="SubmitPayment"/></td>
+             }
+         </tr>
+     </table>
+     <hr/>
+ }
+@code
+{
+    private string nameSurname { get; set; }
+    private string ammount { get; set; }
+    private string message { get; set; }
+    private string account { get; set; }
+    private string url;
+    private bool loading = false;
+
+    protected async Task SubmitPayment()
+    {
+        loading = true;
+        var payment = new PaymentInputDto()
+        {
+            Ammount = Int32.Parse(ammount),
+            Message = message,
+            AccountNumber = account,
+            NameSurname = nameSurname
+        };
+         url = await OperationService.DoPayment(payment);
+        loading = false;
+    }
+}

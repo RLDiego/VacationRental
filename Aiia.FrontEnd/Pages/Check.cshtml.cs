@@ -1,3 +1,4 @@
+using Aiia.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
@@ -12,13 +13,12 @@ namespace Aiia.FrontEnd.Pages
             _memoryCache = memoryCache;
         }
         
-        public IActionResult OnGet(string code)
+        public IActionResult OnGet(string authorizationId)
         {
-            var cacheEntryOptions = new MemoryCacheEntryOptions()
-                .SetSlidingExpiration(TimeSpan.FromMinutes(10));
-
-            _memoryCache.Set("OAuthKey", code, cacheEntryOptions);
-            return Redirect("/");
+            _memoryCache.Remove(Constants.Transaction);
+            _memoryCache.CreateEntry(Constants.Transaction);
+            _memoryCache.Set(Constants.Transaction, authorizationId, TimeSpan.FromMinutes(180));
+            return Redirect("/paymentinfo");
         }
     }
 }
