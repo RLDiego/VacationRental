@@ -2,20 +2,30 @@ using System.Text.Json.Serialization;
 
 namespace Aiia.Contracts.Entities;
 
+
+public class Login
+{
+    public string providerId { get; set; }
+    public DateTime expires { get; set; }
+    public string loginToken { get; set; }
+    public bool supportsUnattended { get; set; }
+    public string label { get; set; }
+    public string subjectId { get; set; }
+    public DateTime aisScaExpires { get; set; }
+}
+
 public class TokenExchangeDto
 {
-    [JsonPropertyName("access_token")]
-    public string AccessToken { get; set; }
-    
-    [JsonPropertyName("expires_in")]
-    public int ExpiresIn { get; set; }
-    
-    [JsonPropertyName("redirect_uri")]
-    public string RedirectUrl { get; set; }
-    
-    [JsonPropertyName("refresh_token")]
-    public string RefreshToken { get; set; }
-    
-    [JsonPropertyName("token_type")]
-    public string TokenType { get; set; }
+    public Session session { get; set; }
+    public Login login { get; set; }
+    public string providerId { get; set; }
+    public object state { get; set; }
 }
+
+public class Session
+{
+    public DateTime expires { get; set; }
+    public string accessToken { get; set; }
+    public List<string> scopes { get; set; }
+}
+

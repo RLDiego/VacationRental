@@ -29,8 +29,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        aiiaLoginUrl = await LoginService.SignInUrl();
          isLoged = await LoginService.IsLoged();
+        if(!isLoged)
+         aiiaLoginUrl = await LoginService.SignInUrl();
     }
 
     private async Task SignOut()

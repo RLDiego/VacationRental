@@ -6,4 +6,5 @@ public interface ITokenRepository
     Task<string> GetToken();
     Task DeleteToken();
     Task<bool> Exists();
+    Task<string> GetLoginUrl();
 }

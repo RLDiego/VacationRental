@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aiia.FrontEnd", "Aiia.Front
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aiia.Tests", "Aiia.Tests\Aiia.Tests.csproj", "{5D15D5F8-6261-4B1F-B0B6-D3560DBEF05A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aiia.Crosscut", "Aiia.Crosscut\Aiia.Crosscut.csproj", "{F4CF7174-5BDC-4054-B28F-11D4C4C234B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{5D15D5F8-6261-4B1F-B0B6-D3560DBEF05A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D15D5F8-6261-4B1F-B0B6-D3560DBEF05A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D15D5F8-6261-4B1F-B0B6-D3560DBEF05A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4CF7174-5BDC-4054-B28F-11D4C4C234B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4CF7174-5BDC-4054-B28F-11D4C4C234B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4CF7174-5BDC-4054-B28F-11D4C4C234B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4CF7174-5BDC-4054-B28F-11D4C4C234B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

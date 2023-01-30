@@ -9,6 +9,7 @@ public class AiiaConfig
     public AiiaEndpoints AiiaEndpoints { get; set; }
     public string LoginCallback { get; set; }
     public string PaymentCallback { get; set; }
+    public string AcceptPaymentCallback { get; set; }
 }
 
 

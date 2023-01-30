@@ -1,4 +1,4 @@
-@page "/paymentinfo"
+@page "/apaymentinfo"
 <PageTitle>Payment</PageTitle>
 @using Aiia.FrontEnd.Data
 @using Aiia.Contracts.Entities
@@ -48,7 +48,9 @@
     private PaymentsAuthStatus authStatus;
     protected override async Task OnInitializedAsync()
     {
-        
-        authStatus = await OperationService.GetPaymentAuthInfo();
+
+        await OperationService.GetAcceptPaymentStatus();
+        authStatus = new PaymentsAuthStatus();
+
     }
 }

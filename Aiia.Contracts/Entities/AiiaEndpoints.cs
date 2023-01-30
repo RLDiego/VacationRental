@@ -10,4 +10,6 @@ public class AiiaEndpoints
     public string GetPaymentAuth { get; set; }
     public string PaymentAuth { get; set; }
     public string PaymentStatus { get; set; }
+    public string CreateAcceptPayment { get; set; }
+    public string AcceptPaymentStatus { get; set; }
 }

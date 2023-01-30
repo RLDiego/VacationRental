@@ -32,8 +32,8 @@ else
         @foreach (var transacion in transacions)
         {
             <tr>
-                <td>@transacion.transactionAmount.value</td>
-                <td>@transacion.currency</td>
+                <td>@transacion.amount.value</td>
+                <td>@transacion.amount.currency</td>
                 <td>@transacion.type</td>
                 <td>@transacion.state</td>
                 <td>@transacion.text</td>

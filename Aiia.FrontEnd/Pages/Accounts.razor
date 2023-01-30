@@ -22,7 +22,7 @@ else
             <th>Name</th>
             <th>Balance</th>
             <th>Owner</th>
-            <th>Bank</th>
+            <th>Number</th>
         </tr>
         </thead>
         <tbody>
@@ -32,7 +32,7 @@ else
                 <td>@account.name</td>
                 <td>@account.bookedBalance</td>
                 <td>@account.owner</td>
-                <td>@account.accountProvider.name</td>
+                <td>@account.number</td>
                 <td>
                     <input type="button" value="Details" onclick="location.href = 'https://localhost:7126/trans?account=@account.id&destination=transactions'"/>
                 </td>  
@@ -43,12 +43,12 @@ else
         }
         </tbody>
     </table>
-    <input type="text" id="AccountNumber" name="AccountNumber"/>
+        <input type="button" value="Sign In" onclick="location.href = '@acceptPayment'"/>
 }
 
 @code {
     private List<Account>? accounts;
-
+    private string acceptPayment = "/apayment";
     protected override async Task OnInitializedAsync()
     {
         accounts = await AccountService.GetAccounts();

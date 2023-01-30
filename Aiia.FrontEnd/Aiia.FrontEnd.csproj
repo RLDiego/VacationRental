@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Aiia.Contracts\Aiia.Contracts.csproj" />
+    <ProjectReference Include="..\Aiia.Crosscut\Aiia.Crosscut.csproj" />
+    <ProjectReference Include="..\Aiia.Domain\Aiia.Domain.csproj" />
     <ProjectReference Include="..\Aiia.Infrastructure\Aiia.Infrastructure.csproj" />
   </ItemGroup>
 

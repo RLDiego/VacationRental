@@ -23,7 +23,11 @@ public class AccountRepository : IAccountRepository
     public async Task<List<Account>> GetAccounts(string token)
     {
         var accountsUrl = $"{_aiiaConfig.AiiaUrl}{_aiiaConfig.AiiaEndpoints.GetAccounts}";
-        var result = await _httpUtils.GetFromUrl(token, accountsUrl);
+        var headers = new Dictionary<string, string>();
+        headers.Add("X-Client-Id", _aiiaConfig.AiiaClientId);
+        headers.Add("X-Client-Secret", _aiiaConfig.AiiaApiKey);
+        
+        var result = await _httpUtils.GetFromUrl(headers,accountsUrl, token);
         var accountList = JsonSerializer.Deserialize<Root>(result);
         return accountList.accounts;
     }

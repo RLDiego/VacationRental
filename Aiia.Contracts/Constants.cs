@@ -13,4 +13,5 @@ public class Constants
 
     public const string Bearer = "Bearer";
     public const string Basic = "basic";
+    public const string AcceptPayment = "acceptPay";
 }

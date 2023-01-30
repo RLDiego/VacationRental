@@ -1,6 +1,5 @@
 ﻿using System.Web;
 using Aiia.Contracts.Entities;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using Aiia.Contracts;
 using Aiia.Contracts.Interfaces;
@@ -32,8 +31,8 @@ namespace Aiia.FrontEnd.Data
 
         public async Task<string> SignInUrl()
         {
-            var aiiaSignInUrl = $"{_aiiaConfig.AiiaUrl}{_aiiaConfig.AiiaEndpoints.Connection}";
-            return await Task.FromResult(String.Format(aiiaSignInUrl, _aiiaConfig.AiiaClientId, HttpUtility.UrlEncode(_aiiaConfig.LoginCallback)));
+            var aiiaSignInUrl = await _tokenRepository.GetLoginUrl();
+            return aiiaSignInUrl;
         }
     }
 }

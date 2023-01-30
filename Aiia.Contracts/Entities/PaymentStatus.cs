@@ -6,7 +6,7 @@ public class AmountAuth
     public double value { get; set; }
 }
 
-public class BbanAuth
+public class BbannAuth
 {
     public string accountNumber { get; set; }
     public string bankCode { get; set; }
@@ -14,7 +14,7 @@ public class BbanAuth
 
 public class DestinationAuth
 {
-    public Bban bban { get; set; }
+    public BbannAuth bban { get; set; }
     public object iban { get; set; }
     public string name { get; set; }
     public object inpaymentForm { get; set; }
